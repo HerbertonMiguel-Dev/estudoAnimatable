@@ -10,36 +10,29 @@ export default function App(){
 
   // useEffect é usado para iniciar a animação assim que o componente for montado
   useEffect(() =>{
-    // Sequência de animações
+  // Define uma animação em loop
+  Animated.loop(
+    // Define uma sequência de animações
     Animated.sequence([
-      // Primeira animação: mudança de opacidade para 1 em 2 segundos
-      Animated.timing(opacidadeAnimada,{
-        toValue: 1,
-        duration: 2000,
-        useNativeDriver: false
+      // Animação de 'timing' para aumentar a largura para 300
+      Animated.timing(larAnimada, {
+        toValue: 300, // Valor final da largura
+        duration: 2000, // Duração da animação em milissegundos
+        useNativeDriver: false // Animação feita no JavaScript em vez do driver nativo
       }),
-      // Animações paralelas: mudança de largura e altura para 300 em 2 segundos
-      Animated.parallel([
-        Animated.timing(larAnimada,{
-          toValue: 300,
-          duration: 2000,
-          useNativeDriver: false
-        }),
-        Animated.timing(altAnimada,{
-          toValue: 300,
-          duration: 2000,
-          useNativeDriver: false
-        }),
-      ]),
-      // Última animação: mudança de opacidade para 0 em 2 segundos
-      Animated.timing(opacidadeAnimada,{
-        toValue: 0,
-        duration: 2000,
-        useNativeDriver: false
-      })
-    ]).start(); // Iniciando a sequência de animações
-  }, []); // A lista de dependências vazia significa que o efeito só roda uma vez, quando o componente é montado
+      // Animação de 'timing' para diminuir a largura para 150
+      Animated.timing(larAnimada, {
+        toValue: 150, // Valor final da largura
+        duration: 2000, // Duração da animação em milissegundos
+        useNativeDriver: false // Animação feita no JavaScript em vez do driver nativo
+      }),
+    ])
+  ).start(); // Iniciando a sequência de animações
+}, []); // A lista de dependências vazia significa que o efeito só roda uma vez, quando o componente é montado
 
+
+      
+    
   return(
     // Container principal que centraliza seu conteúdo
     <View style={styles.container}>
@@ -50,7 +43,7 @@ export default function App(){
         height: altAnimada, // Altura animada
         backgroundColor: '#4169e1', // Cor de fundo azul
         justifyContent: 'center', // Centraliza o texto verticalmente
-        opacity: opacidadeAnimada // Opacidade animada
+        borderRadius: 50
       }}>
         <Text style={{
           textAlign: 'center', // Centraliza o texto horizontalmente
